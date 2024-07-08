@@ -16,7 +16,7 @@ router.put("/:accountID/withdraw", async (request: Request, response: Response) 
   }
 
   try {
-    const updatedAccount = await withdrawal(request.params.accountID, request.body.amount);
+    const updatedAccount = await withdrawal(Number(request.params.accountID), Number(request.body.amount));
     return response.status(200).send(updatedAccount);
   } catch (err) {
     if(err instanceof Error) {
@@ -29,11 +29,12 @@ router.put("/:accountID/deposit", async (request: Request, response: Response) =
   const {error} = transactionSchema.validate(request.body);
 
   if (error) {
+    console.log(error);
     return response.status(400).send(error.details[0].message);
   }
 
   try {
-    const updatedAccount = await deposit(request.params.accountID, request.body.amount);
+    const updatedAccount = await deposit(Number(request.params.accountID), Number(request.body.amount));
     return response.status(200).send(updatedAccount);
   } catch (err) {
     if(err instanceof Error) {

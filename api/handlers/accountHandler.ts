@@ -1,6 +1,6 @@
 import { query } from "../utils/db";
 
-export const getAccount = async (accountID: string) => {
+export const getAccount = async (accountID: number) => {
   const res = await query(`
     SELECT account_number, name, amount, type, credit_limit 
     FROM accounts 

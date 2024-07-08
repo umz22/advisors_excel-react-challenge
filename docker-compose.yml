@@ -1,31 +1,37 @@
-version: "1"
+version: "3.8"
 services:
   db:
     container_name: challenge_db
-    build: ./postgres
+    image: postgres:15.1-alpine
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      PGDATA: ${PGDATA}
+      POSTGRES_DB: challenge
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      PGDATA: /data/postgres
     volumes:
-       - ./init-db.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+      - ./init-transactions.sql:/docker-entrypoint-initdb.d/init-transactions.sql
     ports:
       - "5432:5432"
     restart: unless-stopped
+
   api:
     container_name: challenge_api
     build: ./api
     environment:
-      DATABASE_URL: ${DATABASE_URL}
-      PORT: ${PORT}
+      DATABASE_URL: postgresql://user:password@challenge_db:5432/challenge
+      PORT: 3000
     ports:
       - "3000:3000"
+    depends_on:
+      - db
+
   ui:
     container_name: challenge_ui
     build: ./ui
+    environment:
+      REACT_APP_API_URL: http://challenge_api:3000
     ports:
       - "3001:3001"
-volumes:
-    db:
-      external: true
+    depends_on:
+      - api

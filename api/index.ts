@@ -1,6 +1,10 @@
 import express from "express";
 import transactionsRouter from "./routes/transactions";
 import accountsRouter from "./routes/accounts";
+import dotenv from "dotenv";
+
+// Load environment variables from .env file
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT;
