@@ -28,15 +28,15 @@ reusable components (such as buttons, search bars, banners, etc). Basically thin
 ### Were there any pieces of this project that you were not able to complete that you'd like to mention?
 
 ### If you were to continue building this out, what would you like to add next?
-- I would try to add better error handling with login screen
+- I would try to add better error handling with login screen not only for better UI experience but also security reasons.
 - Add error + success handling in the UI when you click "submit" for either deposit or withdrawl (I added a simple one in this app for now inside AccountDashboard.tsx. I used the SnackBar and Alert library in material ui. For me it was easier to track success + failed in the UI vs checking logs/terminal every time)
 - I would remove the option to have negative numbers in the input fields (in the login screen, deposit, withdrawl, etc) I would also add checks in all the functions to make sure no negative numbers are being used.
 - I noticed there were some functions that did not have type checks (strings should be Numbers, etc) I would flesh out the app with more type checks 
 - Add more of a secure login experience (user, password, otp, etc)
 - in the api handlers I would add more detailed or standardized query recording standards so that there are consistent messaging
-- update Docker Compose Version in .yml file 
+- update Docker Compose Version in .yml file from 1.0 to the more up to date 3.0.0
 - for security, I would add some tools with the backend code to prevent unauthroized access or attacks to personal data. Some examples would be 
-  - authentication mechanisms like OAuth or JWT (basically add middlewear used to create tokens betweem user inputs and route handling)
+  - authentication mechanisms like OAuth or JWT (basically add middlewear to create user tokens in the route handling instead of just handling username + passwords)
   - front end input validation
   - rate limiting middlewear to prevent excess server requests
   - security headers
