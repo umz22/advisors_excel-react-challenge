@@ -15,15 +15,15 @@
     }``` 
 
 ### What issues, if any, did you find with the request to add functionality?
-- Not sure if this is related to "type" issues or if it was an issue with my docker setup, but for some reason the functions weren't returning the right account numbers or amount numbers sometimes when I did GET or PUT requests at first so I made sure to specify the "types" inside the accountHandler functions to numbers for the number values. In general, this is a good practice to do anyway when dealing with complex backend logic. 
-- Also I added a line of code in accounts.ts to have the account number schema be a number always (this might not be a big issue for this challenge but it's just good practice + I did it for diagnosing purposes)
+- Not sure if this is related to "type" issues or if it was an issue with my docker setup, but for some reason the functions weren't returning the right account numbers or amount numbers sometimes when I did GET or PUT requests at first so I made sure to specify the "types" inside the accountHandler functions (i.e specify Numbers, String, etc within functions). In general, this is a good practice to do anyway when dealing with complex backend logic. 
+- Also I added a line of code in accounts.ts to have the account number schema be a number always (again, maybe it wasn't relevant for the challenge or causing my issue from earlier but it's just good practice)
   - ```Schema = Joi.number().integer().required();```
-- I had to install dotenv in order to load environment variables from .env file. Prior to me setting this up, I was getting back "Server is running on port undefined"
+- I had to install dotenv in order to load environment variables from .env file. Prior to me setting this up, I was getting back "Server is running on port undefined" in the logs.
 - I ran into an error "relation 'transactions' does not exist" when making some of my new withdrawl or deposit requests. This usually indicates that the transactions table has not been created in the database for the new logic that I added. to fix this, I created an SQL script to create the transactions table and ensure it is executed when the PostgreSQL container starts. The script is in the root folder called init-transactions.sql
 
 ### Would you modify the structure of this project if you were to start it over? If so, how?
 I would move the AccountDashboard.tsx and Signin.tsx component into a new folder called "screens" or "pages". I like having the "components" folder to be dedicated to strictly 
-reusable components (such as buttons, search bars, banners, etc). Basically things that get reused multiple times. From a UI perspective, I would also create a folder/file for global styling variables as well for things like the button color, text input fields, etc.
+reusable components (such as buttons, search bars, banners, etc). Basically things that get reused multiple times. From a UI perspective, I would also create a folder/file for global styling variables as well for things like brand color, fonts, logos, etc (even though in this challenge we were using material UI, in the real world we might have custom branding/coloring we would need to comply with throughout the app).
 
 ### Were there any pieces of this project that you were not able to complete that you'd like to mention?
 
